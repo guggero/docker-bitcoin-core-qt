@@ -1,8 +1,8 @@
 FROM ruimarinho/bitcoin-core:latest
 
 RUN apt-get update -y \
-  && apt-get install -y libminiupnpc10 \
-                        libqrencode3 \
+  && apt-get install -y libminiupnpc-dev \
+                        libqrencode-dev \
                         libqt5core5a \
                         libqt5dbus5 \
                         libqt5gui5 \
