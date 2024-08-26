@@ -20,7 +20,7 @@ RUN useradd -r bitcoin \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ARG TARGETPLATFORM=linux/amd64
-ENV BITCOIN_VERSION=26.0
+ENV BITCOIN_VERSION=27.1
 ENV BITCOIN_DATA=/home/bitcoin/.bitcoin
 ENV PATH=/opt/bitcoin-${BITCOIN_VERSION}/bin:$PATH
 
@@ -53,6 +53,7 @@ EXPOSE 8332 8333 18332 18333 18443 18444
 ENTRYPOINT ["/entrypoint.sh"]
 
 ENV DISPLAY=:0
+ENV QT_DEBUG_PLUGINS=1
 ENV QT_GRAPHICSSYSTEM="native"
 
 CMD ["bitcoin-qt"]
