@@ -1,4 +1,4 @@
-FROM debian:bullseye-slim
+FROM ubuntu:plucky
 
 LABEL maintainer.0="João Fonseca (@joaopaulofonseca)" \
   maintainer.1="Pedro Branco (@pedrobranco)" \
@@ -16,11 +16,12 @@ RUN useradd -r bitcoin \
         libqt5gui5 \
         libqt5network5 \
         libqt5widgets5 \
+	x11-apps libgl1-mesa-dri libxkbcommon-x11-0 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ARG TARGETPLATFORM=linux/amd64
-ENV BITCOIN_VERSION=27.1
+ENV BITCOIN_VERSION=29.0
 ENV BITCOIN_DATA=/home/bitcoin/.bitcoin
 ENV PATH=/opt/bitcoin-${BITCOIN_VERSION}/bin:$PATH
 
@@ -55,5 +56,6 @@ ENTRYPOINT ["/entrypoint.sh"]
 ENV DISPLAY=:0
 ENV QT_DEBUG_PLUGINS=1
 ENV QT_GRAPHICSSYSTEM="native"
+ENV QT_X11_NO_MITSHM=1
 
 CMD ["bitcoin-qt"]
